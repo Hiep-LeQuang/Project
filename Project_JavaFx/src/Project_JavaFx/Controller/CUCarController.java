@@ -18,26 +18,12 @@ import javafx.scene.image.ImageView;
  * @author lehie
  */
 public class CUCarController {
+    
     @FXML
     private TextField txtCarName;
 
     @FXML
-    private TextField txtColor;
-
-    @FXML
-    private TextField txtGear;
-
-    @FXML
     private TextField txtPrice;
-
-    @FXML
-    private TextField txtLeatherUpholstery;
-
-    @FXML
-    private TextField txtCDPlayer;
-
-    @FXML
-    private TextField txtRearCamera;
 
     @FXML
     private ComboBox<?> cbxBrand;
@@ -58,20 +44,7 @@ public class CUCarController {
     private ComboBox<?> cbxFuel;
 
     @FXML
-    private ComboBox<?> cbxGlasses;
-
-    @FXML
     private TextField txtYear;
-
-    @FXML
-    void btnCancel(ActionEvent event) throws IOException {
-        Navigator.getInstance().goToMain();
-    }
-
-    @FXML
-    void btnSave(ActionEvent event) {
-
-    }
 
     @FXML
     void cbxBrand(ActionEvent event) {
@@ -84,17 +57,22 @@ public class CUCarController {
     }
 
     @FXML
+    void cbxColor(ActionEvent event) {
+
+    }
+
+    @FXML
     void cbxFuel(ActionEvent event) {
 
     }
 
     @FXML
-    void cbxGlasses(ActionEvent event) {
+    void cbxGear(ActionEvent event) {
 
     }
 
     @FXML
-    void txtCDPlayer(ActionEvent event) {
+    void cbxSeat(ActionEvent event) {
 
     }
 
@@ -104,32 +82,27 @@ public class CUCarController {
     }
 
     @FXML
-    void txtColor(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtGear(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtLeatherUpholstery(ActionEvent event) {
-
-    }
-
-    @FXML
     void txtPrice(ActionEvent event) {
 
     }
 
     @FXML
-    void txtRearCamera(ActionEvent event) {
+    void txtSku(ActionEvent event) {
 
     }
 
     @FXML
     void txtYear(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void btnCancel(ActionEvent event) throws IOException {
+        Navigator.getInstance().goToMain();
+    }
+
+    @FXML
+    void btnSave(ActionEvent event) {
 
     }
 }

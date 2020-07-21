@@ -20,8 +20,7 @@ import javafx.collections.ObservableList;
  * @author lehie
  */
 public class Contract {
-    private ObjectProperty<Integer> contractID;
-    private ObjectProperty<Integer> carID;
+    private StringProperty sku;
     private StringProperty carName;
     private StringProperty productReceiptDate;
     private ObjectProperty<Integer> price;
@@ -31,8 +30,7 @@ public class Contract {
     private StringProperty address;
     
     public Contract(){
-        contractID = new SimpleObjectProperty<>(null);
-        carID = new SimpleObjectProperty<>(null);
+        sku = new SimpleStringProperty();
         carName = new SimpleStringProperty();
         productReceiptDate = new SimpleStringProperty();
         price = new SimpleObjectProperty<>(0);
@@ -42,12 +40,8 @@ public class Contract {
         address = new SimpleStringProperty();
     }
     
-    public Integer getContractID() {
-        return contractID.get();
-    }
-    
-    public Integer getCarID() {
-        return carID.get();
+    public String getSku() {
+        return sku.get();
     }
     
     public String getCarName() {
@@ -78,12 +72,8 @@ public class Contract {
         return address.get();
     }
     
-    public void setContractID(int contractID) {
-        this.contractID.set(contractID);
-    }
-
-    public void setCarID(int carID) {
-        this.carID.set(carID);
+    public void setSku(String sku) {
+        this.sku.set(sku);
     }
     
     public void setCarName(String carName) {
@@ -114,12 +104,8 @@ public class Contract {
         this.address.set(address);
     }
 
-    public ObjectProperty<Integer> getContractIDProperty() {
-        return this.contractID;
-    }
-
-    public ObjectProperty<Integer> getCarIDProperty() {
-        return this.carID;
+    public StringProperty getCarSkuProperty() {
+        return this.sku;
     }
 
     public StringProperty getCarNameProperty() {
@@ -156,12 +142,11 @@ public class Contract {
         try (
                 Connection conn = DbService.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT contract.contractID, car.carID, car.carName, contract.productReceiptDate, car.price, contract.deposits, customer.customerName, customer.phone, customer.address FROM contract, car, customer WHERE contract.CarID = car.carID AND contract.customerID = customer.customerID");){
+                ResultSet rs = stmt.executeQuery("SELECT car.sku, car.carName, contract.productReceiptDate, car.price, contract.deposits, customer.customerName, customer.phone, customer.address FROM contract, car, customer WHERE contract.CarID = car.carID AND contract.customerID = customer.customerID");){
             
             while (rs.next()) {
                 Contract c = new Contract();
-                c.setContractID(rs.getInt("contractID"));
-                c.setCarID(rs.getInt("carID"));
+                c.setSku(rs.getString("sku"));
                 c.setCarName(rs.getString("carName"));
                 c.setProductReceiptDate(rs.getString("productReceiptDate"));
                 c.setPrice(rs.getInt("price"));

@@ -20,6 +20,9 @@ import javafx.scene.layout.Pane;
 public class MainController {
     @FXML
     private TableView<Car> tvCars;
+    
+    @FXML
+    private TableColumn<Car, String> tcSeri;
 
     @FXML
     private TableColumn<Car, String> tcProduct;
@@ -101,6 +104,11 @@ public class MainController {
     }
     
     @FXML
+    void btnDetails(ActionEvent event) {
+        
+    }
+    
+    @FXML
     void btnContract(ActionEvent event) throws IOException {
         secPane.getChildren().clear();
         Pane newLoadedPane = FXMLLoader.load(getClass().getResource("/Project_JavaFx/FXML/FormContract.fxml"));
@@ -136,8 +144,8 @@ public class MainController {
     }
     
     @FXML
-    void btnUpdate(ActionEvent event) {
-
+    void btnUpdate(ActionEvent event) throws IOException {
+        Navigator.getInstance().goToCreateCar();
     }
 
     @FXML
@@ -154,6 +162,9 @@ public class MainController {
         
         tvCars.setItems(Car.selectAll());
         
+        tcSeri.setCellValueFactory((Car)->{
+            return Car.getValue().getCarSkuProperty();
+        });        
         tcProduct.setCellValueFactory((Car)->{
             return Car.getValue().getCarNameProperty();
         });

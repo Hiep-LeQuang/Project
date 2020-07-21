@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 21, 2020 lúc 05:02 AM
+-- Thời gian đã tạo: Th7 21, 2020 lúc 02:17 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.1
 
@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `account` (
   `accountID` int(11) NOT NULL,
-  `userName` varchar(20) DEFAULT NULL,
-  `password` varchar(16) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL
+  `userName` varchar(20) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `phone` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -72,24 +72,24 @@ INSERT INTO `brand` (`brandID`, `brand`) VALUES
 
 CREATE TABLE `car` (
   `carID` int(11) NOT NULL,
+  `sku` varchar(5) NOT NULL,
   `carName` varchar(255) NOT NULL,
   `yearOfManufacture` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  `seat` int(11) DEFAULT NULL,
-  `fuelUsed` varchar(50) DEFAULT NULL,
-  `gear` varchar(50) DEFAULT NULL,
-  `glasses` varchar(100) NOT NULL,
-  `brandID` int(11) DEFAULT NULL,
-  `categoryID` int(11) DEFAULT NULL
+  `seat` int(11) NOT NULL,
+  `fuelUsed` varchar(50) NOT NULL,
+  `gear` varchar(50) NOT NULL,
+  `brandID` int(11) NOT NULL,
+  `categoryID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `car`
 --
 
-INSERT INTO `car` (`carID`, `carName`, `yearOfManufacture`, `price`, `seat`, `fuelUsed`, `gear`, `glasses`, `brandID`, `categoryID`) VALUES
-(1, 'Camry', 2020, 1000000000, 4, 'diesel', 'Tự động', '', 1, 1),
-(2, 'Elantra', 2019, 550000000, 4, 'Xăng', 'Bán tự động', '', 2, 2);
+INSERT INTO `car` (`carID`, `sku`, `carName`, `yearOfManufacture`, `price`, `seat`, `fuelUsed`, `gear`, `brandID`, `categoryID`) VALUES
+(1, 'OTO01', 'Camry', 2020, 1000000000, 4, 'diesel', 'Tự động', 1, 1),
+(2, 'OTO02', 'Elantra', 2019, 550000000, 4, 'Xăng', 'Bán tự động', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ INSERT INTO `carcolor` (`carID`, `colorID`) VALUES
 
 CREATE TABLE `category` (
   `categoryID` int(11) NOT NULL,
-  `categoryName` varchar(255) DEFAULT NULL
+  `categoryName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -156,15 +156,15 @@ INSERT INTO `color` (`colorID`, `color`) VALUES
 
 CREATE TABLE `contract` (
   `contractID` int(11) NOT NULL,
-  `customerID` int(11) DEFAULT NULL,
+  `customerID` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `dateOfSale` datetime NOT NULL,
   `status` int(11) NOT NULL,
   `deposits` int(11) NOT NULL,
   `productReceiptDate` date NOT NULL,
   `accountant` varchar(50) NOT NULL,
-  `CarID` int(11) DEFAULT NULL,
-  `colorID` int(11) DEFAULT NULL,
+  `CarID` int(11) NOT NULL,
+  `colorID` int(11) NOT NULL,
   `note` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -173,8 +173,8 @@ CREATE TABLE `contract` (
 --
 
 INSERT INTO `contract` (`contractID`, `customerID`, `price`, `dateOfSale`, `status`, `deposits`, `productReceiptDate`, `accountant`, `CarID`, `colorID`, `note`) VALUES
-(1, 1, 850000000, '2020-07-19 08:00:00', 0, 450000000, '2020-07-25', 'Lê Thu Thủy', 1, NULL, ''),
-(2, 2, 1000000000, '2020-11-05 17:00:00', 1, 560000000, '2020-06-17', 'Bùi Như Lạc', 2, NULL, '');
+(1, 1, 850000000, '2020-07-19 08:00:00', 0, 450000000, '2020-07-25', 'Lê Thu Thủy', 1, 0, ''),
+(2, 2, 1000000000, '2020-11-05 17:00:00', 1, 560000000, '2020-06-17', 'Bùi Như Lạc', 2, 0, '');
 
 -- --------------------------------------------------------
 

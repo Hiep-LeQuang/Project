@@ -60,18 +60,17 @@
             </HBox>
             <TableView fx:id="tvContract" prefHeight="458.0" prefWidth="1134.0">
                <columns>
-                  <TableColumn fx:id="tcContractID" prefWidth="108.00003051757812" text="Mã Hợp Đồng" />
-                  <TableColumn fx:id="tcSeri" prefWidth="86.0" text="Seri Xe" />
-                  <TableColumn fx:id="tcCarName" prefWidth="140.00003051757812" text="Tên Xe" />
-                  <TableColumn fx:id="tcReceiptDate" prefWidth="121.0" text="Ngày Nhận" />
+                  <TableColumn fx:id="tcSeri" prefWidth="99.0" text="Seri Xe" />
+                  <TableColumn fx:id="tcCarName" prefWidth="128.0" text="Tên Xe" />
+                  <TableColumn fx:id="tcReceiptDate" prefWidth="150.0" text="Ngày Nhận" />
                   <TableColumn fx:id="tcPrice" prefWidth="127.0" text="Giá Bán" />
-                  <TableColumn fx:id="tcDeposits" prefWidth="118.0" text="Tiền Cọc" />
-                  <TableColumn fx:id="tcCustomerName" prefWidth="121.0" text="Tên Khách Hàng" />
-                  <TableColumn fx:id="tcPhone" prefWidth="133.0" text="Số Điện Thoại" />
-                  <TableColumn fx:id="tcAddress" minWidth="0.0" prefWidth="119.0" text="Địa Chỉ" />
-                  <TableColumn prefWidth="61.0">
+                  <TableColumn fx:id="tcDeposits" prefWidth="138.0" text="Tiền Cọc" />
+                  <TableColumn fx:id="tcCustomerName" prefWidth="152.0" text="Tên Khách Hàng" />
+                  <TableColumn fx:id="tcPhone" prefWidth="123.0" text="Số Điện Thoại" />
+                  <TableColumn fx:id="tcAddress" minWidth="0.0" prefWidth="146.0" text="Địa Chỉ" />
+                  <TableColumn prefWidth="70.0">
                      <graphic>
-                        <Button mnemonicParsing="false" onAction="#btnDetails" prefHeight="25.0" prefWidth="92.0" text="Details" />
+                        <Button mnemonicParsing="false" onAction="#btnDetails" prefHeight="25.0" prefWidth="92.0" text="Chi Tiết" />
                      </graphic>
                   </TableColumn>
                </columns>

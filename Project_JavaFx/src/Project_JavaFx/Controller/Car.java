@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
  */
 public class Car {
     private ObjectProperty<Integer> carID;
+    private StringProperty sku;
     private StringProperty carName;
     private StringProperty brand;
     private StringProperty category;
@@ -31,6 +32,7 @@ public class Car {
     
     public Car(){
         carID = new SimpleObjectProperty<>(null);
+        sku = new SimpleStringProperty();
         carName = new SimpleStringProperty();
         brand = new SimpleStringProperty();
         category = new SimpleStringProperty();
@@ -42,6 +44,10 @@ public class Car {
 
     public Integer getCarID() {
         return carID.get();
+    }
+    
+    public String getSku() {
+        return sku.get();
     }
     
     public String getCarName() {
@@ -75,6 +81,10 @@ public class Car {
     public void setCarID(int carID) {
         this.carID.set(carID);
     }
+    
+    public void setSku(String sku) {
+        this.sku.set(sku);
+    }
 
     public void setCarName(String carName) {
         this.carName.set(carName);
@@ -106,6 +116,10 @@ public class Car {
 
     public ObjectProperty<Integer> getCarIDProperty() {
         return this.carID;
+    }
+    
+    public StringProperty getCarSkuProperty() {
+        return this.sku;
     }
 
     public StringProperty getCarNameProperty() {
@@ -144,11 +158,12 @@ public class Car {
         try (
                 Connection conn = DbService.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT car.carID,brand.brand,category.categoryName, Car.carName,car.yearOfManufacture,car.price,car.gear,color.color FROM car, brand ,category,color,carcolor WHERE brand.brandID = car.brandID AND category.categoryID = car.categoryID AND carcolor.carID = car.carID AND carcolor.colorID = color.colorID");){
+                ResultSet rs = stmt.executeQuery("SELECT car.carID, car.sku, brand.brand,category.categoryName, Car.carName,car.yearOfManufacture,car.price,car.gear,color.color FROM car, brand ,category,color,carcolor WHERE brand.brandID = car.brandID AND category.categoryID = car.categoryID AND carcolor.carID = car.carID AND carcolor.colorID = color.colorID");){
             
             while (rs.next()) {
                 Car b = new Car();
                 b.setCarID(rs.getInt("carID"));
+                b.setSku(rs.getString("sku"));
                 b.setCarName(rs.getString("carName"));
                 b.setBrand(rs.getString("brand"));
                 b.setCategory(rs.getString("categoryName"));

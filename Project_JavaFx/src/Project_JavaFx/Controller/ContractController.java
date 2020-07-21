@@ -17,13 +17,10 @@ import javafx.scene.control.TableView;
  */
 public class ContractController {
     @FXML
-    private TableView<Contract> tvContract;
-    
-    @FXML
-    private TableColumn<Contract, Integer> tcContractID;
+    private TableView<Contract> tvContract; 
 
-    @FXML
-    private TableColumn<Contract, Integer> tcSeri;
+     @FXML
+    private TableColumn<Contract, String> tcSeri;
 
     @FXML
     private TableColumn<Contract, String> tcCarName;
@@ -50,22 +47,6 @@ public class ContractController {
     void btnDetails(ActionEvent event) {
 
     }
-    
-    @FXML
-    void btnContractName(ActionEvent event) {
-
-    }
-    
-    
-    @FXML
-    void btnBrand(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnCustomer(ActionEvent event) {
-
-    }
            
     @FXML
     void txtSearch(ActionEvent event) {
@@ -77,10 +58,6 @@ public class ContractController {
 
     }
     
-    @FXML
-    void btnDetail(ActionEvent event) {
-
-    }
 
     @FXML
     void btnCreate(ActionEvent event) throws IOException {
@@ -107,11 +84,8 @@ public class ContractController {
         
         tvContract.setItems(Contract.selectAll());
         
-        tcContractID.setCellValueFactory((Contract)->{
-            return Contract.getValue().getContractIDProperty();
-        });
         tcSeri.setCellValueFactory((Contract)->{
-            return Contract.getValue().getCarIDProperty();
+            return Contract.getValue().getCarSkuProperty();
         });
         tcCarName.setCellValueFactory((Contract)->{
             return Contract.getValue().getCarNameProperty();

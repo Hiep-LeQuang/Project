@@ -58,24 +58,22 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </HBox>
-            <TableView fx:id="tvCars" prefHeight="472.0" prefWidth="1134.0">
+            <TableView fx:id="tvCars" prefHeight="458.0" prefWidth="1134.0">
                <columns>
-                  <TableColumn fx:id="tcProduct" prefWidth="200.0" text="Tên Sản Phẩm" />
-                  <TableColumn fx:id="tcBrand" prefWidth="159.0" text="Thương Hiệu" />
-                  <TableColumn fx:id="tcCategory" prefWidth="112.0" text="Loại" />
-                  <TableColumn fx:id="tcYear" prefWidth="133.0" text="Năm Sản Xuất" />
-                  <TableColumn fx:id="tcGear" minWidth="5.0" prefWidth="167.0" text="Hộp Số" />
-                  <TableColumn fx:id="tcColor" minWidth="0.0" prefWidth="147.0" text="Màu Sắc" />
-                  <TableColumn fx:id="tcPrice" prefWidth="151.0" text="Giá Bán" />
-                  <TableColumn prefWidth="64.0">
+                  <TableColumn fx:id="tcSeri" prefWidth="122.0" text="Seri Xe" />
+                  <TableColumn fx:id="tcProduct" prefWidth="184.0" text="Tên Sản Phẩm" />
+                  <TableColumn fx:id="tcBrand" prefWidth="107.0" text="Thương Hiệu" />
+                  <TableColumn fx:id="tcCategory" prefWidth="139.0" text="Loại" />
+                  <TableColumn fx:id="tcYear" prefWidth="148.0" text="Năm Sản Xuất" />
+                  <TableColumn fx:id="tcGear" minWidth="5.0" prefWidth="123.0" text="Hộp Số" />
+                  <TableColumn fx:id="tcColor" minWidth="0.0" prefWidth="110.0" text="Màu Sắc" />
+                  <TableColumn fx:id="tcPrice" prefWidth="132.0" text="Giá Bán" />
+                  <TableColumn prefWidth="68.0">
                      <graphic>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Chi Tiết" />
+                        <Button mnemonicParsing="false" onAction="#btnDetails" prefHeight="25.0" prefWidth="90.0" text="Chi Tiết" />
                      </graphic>
                   </TableColumn>
                </columns>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
             </TableView>
             <HBox alignment="CENTER" prefHeight="57.0" prefWidth="1134.0">
                <children>

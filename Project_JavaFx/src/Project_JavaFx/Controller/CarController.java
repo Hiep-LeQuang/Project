@@ -8,7 +8,6 @@ package Project_JavaFx.Controller;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
@@ -20,6 +19,9 @@ import javafx.scene.layout.Pane;
 public class CarController {
     @FXML
     private TableView<Car> tvCars;
+    
+    @FXML
+    private TableColumn<Car, String> tcSeri;
 
     @FXML
     private TableColumn<Car, String> tcProduct;
@@ -74,8 +76,8 @@ public class CarController {
     }
     
     @FXML
-    void btnDetail(ActionEvent event) {
-
+    void btnDetails(ActionEvent event) {
+        
     }
     
     
@@ -102,6 +104,10 @@ public class CarController {
     public void initialize(){
         
         tvCars.setItems(Car.selectAll());
+        
+        tcSeri.setCellValueFactory((Car)->{
+            return Car.getValue().getCarSkuProperty();
+        });
         
         tcProduct.setCellValueFactory((Car)->{
             return Car.getValue().getCarNameProperty();
