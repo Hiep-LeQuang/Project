@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="474.0" prefWidth="1134.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project_JavaFx.Controller.CUCarController">
+   <children>
+      <Label layoutX="276.0" layoutY="27.0" prefHeight="54.0" prefWidth="135.0" text="FormCreate" textFill="#00b2d1">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="297.0" layoutY="206.0" text="Brand" textFill="#a2a2a2" />
+      <Label layoutX="287.0" layoutY="140.0" text="Car Name" textFill="#a2a2a2" />
+      <Label layoutX="289.0" layoutY="275.0" text="Catagory" textFill="#a2a2a2" />
+      <Label layoutX="729.0" layoutY="274.0" text="Gear" textFill="#a2a2a2" />
+      <Label layoutX="716.0" layoutY="344.0" text="Fuel Used" textFill="#a2a2a2" />
+      <Label layoutX="541.0" layoutY="437.0" text="Price" textFill="#a2a2a2" />
+      <Label layoutX="727.0" layoutY="140.0" text="Color" textFill="#a2a2a2" />
+      <Label layoutX="722.0" layoutY="206.0" text="Glasses" textFill="#a2a2a2" />
+      <Pane prefHeight="690.0" prefWidth="222.0" style="-fx-background-color: #00b2d1;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="11.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="90.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Picture/down-arrow%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="91.0" layoutY="558.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Picture/up-arrow%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="101.0" fitWidth="109.0" layoutX="61.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Picture/car.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Separator layoutX="239.0" layoutY="104.0" prefHeight="13.0" prefWidth="793.0" />
+      <Label layoutX="245.0" layoutY="352.0" text="Year Of Manufacture" textFill="#a2a2a2" />
+      <TextField fx:id="txtCarName" layoutX="379.0" layoutY="133.0" onAction="#txtCarName" prefHeight="31.0" prefWidth="214.0" />
+      <TextField fx:id="txtColor" layoutX="809.0" layoutY="133.0" onAction="#txtColor" prefHeight="31.0" prefWidth="214.0" />
+      <TextField fx:id="txtGear" layoutX="809.0" layoutY="268.0" onAction="#txtGear" prefHeight="31.0" prefWidth="214.0" />
+      <TextField fx:id="txtPrice" layoutX="615.0" layoutY="430.0" onAction="#txtPrice" prefHeight="31.0" prefWidth="214.0" />
+      <ComboBox fx:id="cbxBrand" layoutX="379.0" layoutY="200.0" onAction="#cbxBrand" prefHeight="31.0" prefWidth="214.0" />
+      <Button fx:id="btnCancel" layoutX="829.0" layoutY="537.0" mnemonicParsing="false" onAction="#btnCancel" prefHeight="42.0" prefWidth="101.0" text="Đóng">
+         <graphic>
+            <ImageView fx:id="btnBack" fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Picture/undo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnSave" layoutX="486.0" layoutY="537.0" mnemonicParsing="false" onAction="#btnSave" prefHeight="42.0" prefWidth="101.0" text="Lưu">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Picture/insert1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ComboBox fx:id="cbxCategor" layoutX="379.0" layoutY="267.0" onAction="#cbxCategor" prefHeight="31.0" prefWidth="214.0" />
+      <ComboBox fx:id="cbxFuel" layoutX="809.0" layoutY="337.0" onAction="#cbxFuel" prefHeight="31.0" prefWidth="214.0" />
+      <ComboBox fx:id="cbxGlasses" layoutX="809.0" layoutY="199.0" onAction="#cbxGlasses" prefHeight="31.0" prefWidth="214.0" />
+      <TextField fx:id="txtYear" layoutX="379.0" layoutY="345.0" onAction="#txtYear" prefHeight="31.0" prefWidth="214.0" />
+   </children>
+</AnchorPane>
