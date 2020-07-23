@@ -8,6 +8,7 @@ package Project_JavaFx.Controller;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -23,8 +24,11 @@ public class CategoryController {
     private TableColumn<Category, String> tcCategory;
     
     @FXML
+    private TableColumn<Category, String> tcStatus;
+    
+    @FXML
     void btnCancel(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @FXML
@@ -32,9 +36,21 @@ public class CategoryController {
         Navigator.getInstance().goToCreateCategory();
     }
 
-    @FXML
-    void btnDelete(ActionEvent event) {
+     @FXML
+    void btnStatus(ActionEvent event) {
+        Category updateStatus = tvCategory.getSelectionModel().getSelectedItem();
 
+        if (updateStatus == null) {
+            selectedCategoryWarning();
+        } else {
+            if(updateStatus.getStatus().equals("Đang Kinh Doanh")){
+                
+                updateStatus.setStatus("Ngừng Kinh Doanh");
+            }else{
+                updateStatus.setStatus("Đang Kinh Doanh");
+            }
+            Category.update(updateStatus);
+        }
     }
 
     @FXML
@@ -52,12 +68,23 @@ public class CategoryController {
 
     }
     
+    private void selectedCategoryWarning() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Vui lòng chọn một hợp đồng");
+        alert.setHeaderText("Bạn phải chọn một hợp đồng ở trong danh sách");
+        alert.showAndWait();
+    }
+    
     public void initialize(){
         
         tvCategory.setItems(Category.selectAll());
         
         tcCategory.setCellValueFactory((Category)->{
             return Category.getValue().getCategoryProperty();
-        });   
+        });
+        
+        tcStatus.setCellValueFactory((Category)->{
+            return Category.getValue().getStatusProperty();
+        }); 
     }
 }

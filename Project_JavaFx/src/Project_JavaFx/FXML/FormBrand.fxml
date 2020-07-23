@@ -14,12 +14,13 @@
    <children>
       <TableView fx:id="tvBrand" layoutY="37.0" prefHeight="421.0" prefWidth="1134.0">
          <columns>
-            <TableColumn fx:id="tcBrand" prefWidth="1133.000015258789" text="Thương Hiệu" />
+            <TableColumn fx:id="tcBrand" prefWidth="571.0" text="Thương Hiệu" />
+            <TableColumn fx:id="tcStatus" prefWidth="563.0" text="Trạng Thái" />
          </columns>
       </TableView>
       <Button layoutX="358.0" layoutY="473.0" mnemonicParsing="false" onAction="#btnCreate" prefHeight="41.0" prefWidth="104.0" text="Thêm" />
       <Button layoutX="498.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnUpdate" prefHeight="41.0" prefWidth="94.0" text="Sửa" />
-      <Button layoutX="631.0" layoutY="473.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="41.0" prefWidth="113.0" text="Xóa" />
+      <Button layoutX="631.0" layoutY="473.0" mnemonicParsing="false" onAction="#btnStatus" prefHeight="41.0" prefWidth="113.0" text="Dừng Bán \ Bán" />
       <Button layoutX="765.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnCancel" prefHeight="41.0" prefWidth="94.0" text="Thoát" />
       <Button alignment="CENTER" layoutX="855.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnSearch" prefHeight="29.0" prefWidth="72.0" text="Tìm" textAlignment="CENTER" />
       <TextField layoutX="665.0" layoutY="-1.0" onAction="#txtSearch" prefHeight="30.0" prefWidth="192.0" />

@@ -6,6 +6,7 @@
 package Project_JavaFx.Controller;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javafx.beans.property.ObjectProperty;
@@ -72,5 +73,30 @@ public class Color {
         }
         
         return colors;
+    }
+    
+    public static boolean update(Color updateColor){
+        String sql = "UPDATE color SET color = ? WHERE color.colorID = ?;";
+               System.out.println(updateColor); 
+        try (
+                Connection conn = DbService.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ){
+            
+            stmt.setString(1, updateColor.getColor());
+            stmt.setInt(2, updateColor.getColorID());
+                    
+            int rowUpdate1 = stmt.executeUpdate();
+            if(rowUpdate1 == 1 ){
+                return true;
+            }else{
+                System.out.println("Cập nhật không thành công");
+                return false;
+            }
+   
+        } catch (Exception e) {
+            System.err.print(e);
+            return false;
+        }
     }
 }

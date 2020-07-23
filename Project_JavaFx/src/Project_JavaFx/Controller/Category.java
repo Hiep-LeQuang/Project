@@ -6,6 +6,7 @@
 package Project_JavaFx.Controller;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javafx.beans.property.ObjectProperty;
@@ -22,10 +23,12 @@ import javafx.collections.ObservableList;
 public class Category {
     private ObjectProperty<Integer> categoryID;
     private StringProperty category;
+    private StringProperty status;
     
     public Category(){
         categoryID = new SimpleObjectProperty<>(null);
         category = new SimpleStringProperty();
+        status = new SimpleStringProperty();
     }
     
     public Integer getCategoryID() {
@@ -35,21 +38,33 @@ public class Category {
     public String getCategory() {
         return category.get();
     }
+    
+    public String getStatus() {
+        return status.get();
+    }
 
     public void setCategoryID(int categoryID) {
         this.categoryID.set(categoryID);
     }
-
+    
     public void setCategory(String category) {
         this.category.set(category);
     }
-
+    
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+    
     public ObjectProperty<Integer> getCategoryIDProperty() {
         return this.categoryID;
     }
 
     public StringProperty getCategoryProperty() {
         return this.category;
+    }
+    
+    public StringProperty getStatusProperty() {
+        return this.status;
     }
     
     public static ObservableList<Category> selectAll(){
@@ -62,7 +77,13 @@ public class Category {
             
             while (rs.next()) {
                 Category c = new Category();
+                c.setCategoryID(rs.getInt("categoryID"));
                 c.setCategory(rs.getString("categoryName"));
+                if(rs.getInt("status") == 0){
+                     c.setStatus("Ngừng Kinh Doanh");
+                } else{
+                    c.setStatus("Đang Kinh Doanh");
+                }
                 
                 categorys.add(c);
             }
@@ -71,5 +92,36 @@ public class Category {
         }
         
         return categorys;
+    }
+    
+    public static boolean update(Category updateCategory){
+        String sql = "UPDATE category SET categoryName = ?, status = ? WHERE category.categoryID = ?;";
+               System.out.println(updateCategory); 
+        try (
+                Connection conn = DbService.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ){
+            
+            stmt.setString(1, updateCategory.getCategory());
+            if(updateCategory.getStatus().equals("Đang Kinh Doanh")){
+                stmt.setInt(2,1); 
+            } else{
+                stmt.setInt(2,0); 
+            }
+            
+            stmt.setInt(3, updateCategory.getCategoryID());
+                    
+            int rowUpdate1 = stmt.executeUpdate();
+            if(rowUpdate1 == 1 ){
+                return true;
+            }else{
+                System.out.println("Không thay đổi được trạng thái của loại");
+                return false;
+            }
+   
+        } catch (Exception e) {
+            System.err.print(e);
+            return false;
+        }
     }
 }

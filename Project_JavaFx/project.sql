@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 21, 2020 lúc 02:17 PM
+-- Thời gian đã tạo: Th7 23, 2020 lúc 07:54 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.1
 
@@ -53,16 +53,17 @@ INSERT INTO `account` (`accountID`, `userName`, `password`, `name`, `phone`, `em
 
 CREATE TABLE `brand` (
   `brandID` int(11) NOT NULL,
-  `brand` varchar(255) NOT NULL
+  `brand` varchar(255) NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `brand`
 --
 
-INSERT INTO `brand` (`brandID`, `brand`) VALUES
-(1, 'Toyota'),
-(2, 'Hyundai');
+INSERT INTO `brand` (`brandID`, `brand`, `status`) VALUES
+(1, 'Toyota', 0),
+(2, 'Hyundai', 0);
 
 -- --------------------------------------------------------
 
@@ -79,6 +80,7 @@ CREATE TABLE `car` (
   `seat` int(11) NOT NULL,
   `fuelUsed` varchar(50) NOT NULL,
   `gear` varchar(50) NOT NULL,
+  `status` int(1) NOT NULL,
   `brandID` int(11) NOT NULL,
   `categoryID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -87,9 +89,10 @@ CREATE TABLE `car` (
 -- Đang đổ dữ liệu cho bảng `car`
 --
 
-INSERT INTO `car` (`carID`, `sku`, `carName`, `yearOfManufacture`, `price`, `seat`, `fuelUsed`, `gear`, `brandID`, `categoryID`) VALUES
-(1, 'OTO01', 'Camry', 2020, 1000000000, 4, 'diesel', 'Tự động', 1, 1),
-(2, 'OTO02', 'Elantra', 2019, 550000000, 4, 'Xăng', 'Bán tự động', 2, 2);
+INSERT INTO `car` (`carID`, `sku`, `carName`, `yearOfManufacture`, `price`, `seat`, `fuelUsed`, `gear`, `status`, `brandID`, `categoryID`) VALUES
+(1, 'OTO05', 'Camry1', 2015, 1000000001, 5, 'diesel1', 'Tự động1', 1, 2, 2),
+(2, 'OTO02', 'Elantra', 2019, 550000000, 4, 'Xăng', 'Bán tự động', 0, 2, 2),
+(15, 'OTO04', 'adfada', 2017, 850000000, 7, 'Xăng', 'Bán Tự Động', 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -108,7 +111,8 @@ CREATE TABLE `carcolor` (
 
 INSERT INTO `carcolor` (`carID`, `colorID`) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(15, 12);
 
 -- --------------------------------------------------------
 
@@ -118,16 +122,18 @@ INSERT INTO `carcolor` (`carID`, `colorID`) VALUES
 
 CREATE TABLE `category` (
   `categoryID` int(11) NOT NULL,
-  `categoryName` varchar(255) NOT NULL
+  `categoryName` varchar(255) NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `category`
 --
 
-INSERT INTO `category` (`categoryID`, `categoryName`) VALUES
-(1, 'Xe Con'),
-(2, 'Bán Tải');
+INSERT INTO `category` (`categoryID`, `categoryName`, `status`) VALUES
+(1, 'Xe Con', 1),
+(2, 'Bán Tải', 0),
+(13, 'Xe Hơi', 1);
 
 -- --------------------------------------------------------
 
@@ -146,7 +152,9 @@ CREATE TABLE `color` (
 
 INSERT INTO `color` (`colorID`, `color`) VALUES
 (1, 'Xanh'),
-(2, 'Trắng');
+(2, 'Trắng'),
+(11, 'Vàng'),
+(12, 'Đen');
 
 -- --------------------------------------------------------
 
@@ -173,8 +181,8 @@ CREATE TABLE `contract` (
 --
 
 INSERT INTO `contract` (`contractID`, `customerID`, `price`, `dateOfSale`, `status`, `deposits`, `productReceiptDate`, `accountant`, `CarID`, `colorID`, `note`) VALUES
-(1, 1, 850000000, '2020-07-19 08:00:00', 0, 450000000, '2020-07-25', 'Lê Thu Thủy', 1, 0, ''),
-(2, 2, 1000000000, '2020-11-05 17:00:00', 1, 560000000, '2020-06-17', 'Bùi Như Lạc', 2, 0, '');
+(11, 2, 1000000001, '2020-07-20 08:00:00', 1, 420000000, '2020-07-29', 'Lê Hòa Thân', 1, 1, 'abc'),
+(12, 3, 550000000, '2020-07-19 08:00:00', 0, 450000000, '2020-07-31', 'Lê Thu Thủy', 2, 1, 'fgd');
 
 -- --------------------------------------------------------
 
@@ -185,7 +193,7 @@ INSERT INTO `contract` (`contractID`, `customerID`, `price`, `dateOfSale`, `stat
 CREATE TABLE `customer` (
   `customerID` int(11) NOT NULL,
   `customerName` varchar(255) NOT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` varchar(11) NOT NULL,
   `address` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -195,8 +203,9 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customerID`, `customerName`, `phone`, `address`, `email`) VALUES
-(1, 'Hoàng Gia Bảo', 985113113, 'Nam Định', 'giabao@gmail.com'),
-(2, 'Cao Kiên Trung', 989565656, 'Hà Nội', 'trungkc@gmail.com');
+(2, 'Cao Kiên Trung', '989565656', 'Hà Nội', 'trungkc@gmail.com'),
+(3, 'Vũ Thiên Hương', '985113113', 'Hòa Bình', 'huong@gami.com'),
+(4, 'Tô Tiến Tài', '326749515', 'Nam Định', 'hiep@gmail.com');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -275,31 +284,31 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT cho bảng `car`
 --
 ALTER TABLE `car`
-  MODIFY `carID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `carID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `color`
 --
 ALTER TABLE `color`
-  MODIFY `colorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `colorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `contract`
 --
 ALTER TABLE `contract`
-  MODIFY `contractID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `contractID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

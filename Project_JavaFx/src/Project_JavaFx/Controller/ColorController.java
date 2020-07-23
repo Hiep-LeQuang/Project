@@ -5,6 +5,7 @@
  */
 package Project_JavaFx.Controller;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -23,12 +24,12 @@ public class ColorController {
 
     @FXML
     void btnCancel(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @FXML
-    void btnCreate(ActionEvent event) {
-
+    void btnCreate(ActionEvent event) throws IOException {
+        Navigator.getInstance().goToCreateColor();
     }
 
     @FXML
@@ -37,8 +38,8 @@ public class ColorController {
     }
 
     @FXML
-    void btnUpdate(ActionEvent event) {
-
+    void btnUpdate(ActionEvent event) throws IOException {
+        Navigator.getInstance().goToCreateColor();
     }
 
     @FXML

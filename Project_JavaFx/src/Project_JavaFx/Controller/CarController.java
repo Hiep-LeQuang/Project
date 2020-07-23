@@ -8,6 +8,7 @@ package Project_JavaFx.Controller;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
@@ -44,6 +45,9 @@ public class CarController {
     @FXML
     private TableColumn<Car, Integer> tcPrice;
 
+    @FXML
+    private TableColumn<Car, String> tcStatus;
+    
     @FXML
     private Pane secPane;
     
@@ -92,13 +96,20 @@ public class CarController {
     }
 
     @FXML
-    void btnDelete(ActionEvent event) {
+    void btnStatus(ActionEvent event) {
 
     }
     
     @FXML
     void btnCancel(ActionEvent event) {
 
+    }
+    
+    private void selectedCarWarning() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Vui lòng chọn một chiếc xe");
+        alert.setHeaderText("Bạn phải chọn một chiếc xe ở trong danh sách");
+        alert.showAndWait();
     }
     
     public void initialize(){
@@ -129,6 +140,9 @@ public class CarController {
         });
         tcColor.setCellValueFactory((Car)->{
             return Car.getValue().getColorProperty();
+        });
+        tcStatus.setCellValueFactory((Car) -> {
+            return Car.getValue().getStatusProperty();
         });
     }
 }

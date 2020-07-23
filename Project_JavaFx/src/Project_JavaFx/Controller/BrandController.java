@@ -8,6 +8,7 @@ package Project_JavaFx.Controller;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -23,8 +24,11 @@ public class BrandController {
     private TableColumn<Brand, String> tcBrand;
     
     @FXML
+    private TableColumn<Brand, String> tcStatus;
+    
+    @FXML
     void btnCancel(ActionEvent event) {
-
+        System.exit(0);
     }
 
     @FXML
@@ -33,8 +37,20 @@ public class BrandController {
     }
 
     @FXML
-    void btnDelete(ActionEvent event) {
+    void btnStatus(ActionEvent event) {
+        Brand updateStatus = tvBrand.getSelectionModel().getSelectedItem();
 
+        if (updateStatus == null) {
+            selectedBrandWarning();
+        } else {
+            if(updateStatus.getStatus().equals("Đang Kinh Doanh")){
+                
+                updateStatus.setStatus("Ngừng Kinh Doanh");
+            }else{
+                updateStatus.setStatus("Đang Kinh Doanh");
+            }
+            Brand.update(updateStatus);
+        }
     }
 
     @FXML
@@ -52,12 +68,23 @@ public class BrandController {
 
     }
     
+    private void selectedBrandWarning() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Vui lòng chọn một hợp đồng");
+        alert.setHeaderText("Bạn phải chọn một hợp đồng ở trong danh sách");
+        alert.showAndWait();
+    }
+    
     public void initialize(){
         
         tvBrand.setItems(Brand.selectAll());
         
         tcBrand.setCellValueFactory((Brand)->{
             return Brand.getValue().getBrandProperty();
-        });   
+        });
+        
+        tcStatus.setCellValueFactory((Brand)->{
+            return Brand.getValue().getStatusProperty();
+        }); 
     }
 }

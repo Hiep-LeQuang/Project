@@ -22,6 +22,8 @@ public class Navigator {
     public static final String CREATE_CONTRACT_FXML = "/Project_JavaFx/FXML/FormCUContract.fxml";
     public static final String CREATE_CATEGORY_FXML = "/Project_JavaFx/FXML/FormCUCategory.fxml";
     public static final String CREATE_BRAND_FXML = "/Project_JavaFx/FXML/FormCUBrand.fxml";
+    public static final String CREATE_COLOR_FXML = "/Project_JavaFx/FXML/FormCUColor.fxml";
+    public static final String CREATE_CUSTOMER_FXML = "/Project_JavaFx/FXML/FormCUCustomer.fxml";
     
     private FXMLLoader loader;
     private Stage stage = null;
@@ -77,6 +79,14 @@ public class Navigator {
     
     public void goToCreateBrand() throws IOException{
         this.goTo(CREATE_BRAND_FXML);
+    }
+    
+    public void goToCreateColor() throws IOException{
+        this.goTo(CREATE_COLOR_FXML);
+    }
+    
+    public void goToCreateCustomer() throws IOException{
+        this.goTo(CREATE_CUSTOMER_FXML);
     }
 
 }

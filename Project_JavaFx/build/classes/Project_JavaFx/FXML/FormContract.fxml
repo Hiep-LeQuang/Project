@@ -60,15 +60,16 @@
             </HBox>
             <TableView fx:id="tvContract" prefHeight="458.0" prefWidth="1134.0">
                <columns>
-                  <TableColumn fx:id="tcSeri" prefWidth="99.0" text="Seri Xe" />
-                  <TableColumn fx:id="tcCarName" prefWidth="128.0" text="Tên Xe" />
-                  <TableColumn fx:id="tcReceiptDate" prefWidth="150.0" text="Ngày Nhận" />
-                  <TableColumn fx:id="tcPrice" prefWidth="127.0" text="Giá Bán" />
-                  <TableColumn fx:id="tcDeposits" prefWidth="138.0" text="Tiền Cọc" />
-                  <TableColumn fx:id="tcCustomerName" prefWidth="152.0" text="Tên Khách Hàng" />
-                  <TableColumn fx:id="tcPhone" prefWidth="123.0" text="Số Điện Thoại" />
-                  <TableColumn fx:id="tcAddress" minWidth="0.0" prefWidth="146.0" text="Địa Chỉ" />
-                  <TableColumn prefWidth="70.0">
+                  <TableColumn fx:id="tcSeri" prefWidth="102.0" text="Seri Xe" />
+                  <TableColumn fx:id="tcCarName" prefWidth="113.0" text="Tên Xe" />
+                  <TableColumn fx:id="tcReceiptDate" prefWidth="153.00003051757812" text="Ngày Nhận" />
+                  <TableColumn fx:id="tcPrice" prefWidth="120.0" text="Giá Bán" />
+                  <TableColumn fx:id="tcDeposits" prefWidth="120.0" text="Tiền Cọc" />
+                  <TableColumn fx:id="tcCustomerName" prefWidth="142.0" text="Tên Khách Hàng" />
+                  <TableColumn fx:id="tcPhone" prefWidth="116.0" text="Số Điện Thoại" />
+                  <TableColumn fx:id="tcAddress" minWidth="0.0" prefWidth="119.0" text="Địa Chỉ" />
+                  <TableColumn fx:id="tcStatus" prefWidth="85.0" text="Trạng Thái" />
+                  <TableColumn prefWidth="64.0">
                      <graphic>
                         <Button mnemonicParsing="false" onAction="#btnDetails" prefHeight="25.0" prefWidth="92.0" text="Chi Tiết" />
                      </graphic>
@@ -84,6 +85,11 @@
                      </HBox.margin>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#btnDelete" prefHeight="25.0" prefWidth="69.0" text="Xóa">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#btnStatus" text="Đang Chờ \Đã Giao">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>

@@ -7,8 +7,6 @@ package Project_JavaFx.Controller;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -21,7 +19,7 @@ public class Main_Project extends Application {
     public void start(Stage primaryStage) throws IOException {
         Navigator.getInstance().setStage(primaryStage);
         Navigator.getInstance().getStage().setTitle("Quản Lý Bán Ô Tô");
-        Navigator.getInstance().goToLogin();
+        Navigator.getInstance().goToMain();
         Navigator.getInstance().getStage().show();
     }
 

@@ -14,84 +14,85 @@
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="529.0" prefWidth="1134.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Project_JavaFx.Controller.CarController">
-   <children>
-      <VBox prefHeight="529.0" prefWidth="1134.0">
-         <children>
-            <HBox alignment="BOTTOM_RIGHT">
-               <children>
-                  <MenuButton mnemonicParsing="false" prefHeight="0.0" prefWidth="159.0" text="Tìm Kiếm">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#btnCarName" text="Theo Tên" />
-                        <MenuItem mnemonicParsing="false" onAction="#btnBrand" text="Theo Thương Hiệu" />
-                        <MenuItem mnemonicParsing="false" onAction="#btnYear" text="Theo Năm Sản Xuất" />
-                     </items>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </MenuButton>
-                  <TextField onAction="#txtSearch" prefHeight="30.0" prefWidth="192.0">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </TextField>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#btnSearch" prefHeight="29.0" prefWidth="72.0" text="Tìm" textAlignment="CENTER">
-                     <HBox.margin>
-                        <Insets right="50.0" />
-                     </HBox.margin>
-                  </Button>
-                  <SplitMenuButton mnemonicParsing="false" prefHeight="29.0" prefWidth="107.0" text="Sắp Xếp">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Tên xe A-Z" />
-                        <MenuItem mnemonicParsing="false" text="Tên xe Z-A" />
-                        <MenuItem mnemonicParsing="false" text="Giá tăng dần" />
-                        <MenuItem mnemonicParsing="false" text="Giá giảm dần" />
-                     </items>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </SplitMenuButton>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <TableView fx:id="tvCars" prefHeight="458.0" prefWidth="1134.0">
-               <columns>
-                  <TableColumn fx:id="tcSeri" prefWidth="122.0" text="Seri Xe" />
-                  <TableColumn fx:id="tcProduct" prefWidth="184.0" text="Tên Sản Phẩm" />
-                  <TableColumn fx:id="tcBrand" prefWidth="107.0" text="Thương Hiệu" />
-                  <TableColumn fx:id="tcCategory" prefWidth="139.0" text="Loại" />
-                  <TableColumn fx:id="tcYear" prefWidth="148.0" text="Năm Sản Xuất" />
-                  <TableColumn fx:id="tcGear" minWidth="5.0" prefWidth="123.0" text="Hộp Số" />
-                  <TableColumn fx:id="tcColor" minWidth="0.0" prefWidth="110.0" text="Màu Sắc" />
-                  <TableColumn fx:id="tcPrice" prefWidth="132.0" text="Giá Bán" />
-                  <TableColumn prefWidth="68.0">
-                     <graphic>
-                        <Button mnemonicParsing="false" onAction="#btnDetails" prefHeight="25.0" prefWidth="90.0" text="Chi Tiết" />
-                     </graphic>
-                  </TableColumn>
-               </columns>
-            </TableView>
-            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="1134.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#btnCreate" prefHeight="25.0" prefWidth="73.0" text="Thêm" />
-                  <Button mnemonicParsing="false" onAction="#btnUpdate" prefHeight="25.0" prefWidth="68.0" text="Sửa">
-                     <HBox.margin>
-                        <Insets left="30.0" right="30.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#btnDelete" prefHeight="25.0" prefWidth="69.0" text="Xóa">
+    <children>
+        <VBox prefHeight="529.0" prefWidth="1134.0">
+            <children>
+                <HBox alignment="BOTTOM_RIGHT">
+                    <children>
+                        <MenuButton mnemonicParsing="false" prefHeight="0.0" prefWidth="159.0" text="Tìm Kiếm">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#btnCarName" text="Theo Tên" />
+                                <MenuItem mnemonicParsing="false" onAction="#btnBrand" text="Theo Thương Hiệu" />
+                                <MenuItem mnemonicParsing="false" onAction="#btnYear" text="Theo Năm Sản Xuất" />
+                            </items>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </MenuButton>
+                        <TextField onAction="#txtSearch" prefHeight="30.0" prefWidth="192.0">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </TextField>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#btnSearch" prefHeight="29.0" prefWidth="72.0" text="Tìm" textAlignment="CENTER">
+                            <HBox.margin>
+                                <Insets right="50.0" />
+                            </HBox.margin>
+                        </Button>
+                        <SplitMenuButton mnemonicParsing="false" prefHeight="29.0" prefWidth="107.0" text="Sắp Xếp">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Tên xe A-Z" />
+                                <MenuItem mnemonicParsing="false" text="Tên xe Z-A" />
+                                <MenuItem mnemonicParsing="false" text="Giá tăng dần" />
+                                <MenuItem mnemonicParsing="false" text="Giá giảm dần" />
+                            </items>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </SplitMenuButton>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </HBox>
+                <TableView fx:id="tvCars" prefHeight="458.0" prefWidth="1134.0">
+                    <columns>
+                        <TableColumn fx:id="tcSeri" prefWidth="122.0" text="Seri Xe" />
+                        <TableColumn fx:id="tcProduct" prefWidth="184.0" text="Tên Sản Phẩm" />
+                        <TableColumn fx:id="tcBrand" prefWidth="107.0" text="Thương Hiệu" />
+                        <TableColumn fx:id="tcCategory" prefWidth="139.0" text="Loại" />
+                        <TableColumn fx:id="tcYear" prefWidth="110.0" text="Năm Sản Xuất" />
+                        <TableColumn fx:id="tcGear" minWidth="5.0" prefWidth="116.0" text="Hộp Số" />
+                        <TableColumn fx:id="tcColor" minWidth="0.0" prefWidth="100.0" text="Màu Sắc" />
+                        <TableColumn fx:id="tcPrice" prefWidth="116.0" text="Giá Bán" />
+                        <TableColumn fx:id="tcStatus" prefWidth="74.0" text="Trạng Thái" />
+                        <TableColumn prefWidth="66.0">
+                            <graphic>
+                                <Button mnemonicParsing="false" onAction="#btnDetails" prefHeight="25.0" prefWidth="90.0" text="Chi Tiết" />
+                            </graphic>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <HBox alignment="CENTER" prefHeight="57.0" prefWidth="1134.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#btnCreate" prefHeight="25.0" prefWidth="73.0" text="Thêm" />
+                        <Button mnemonicParsing="false" onAction="#btnUpdate" prefHeight="25.0" prefWidth="68.0" text="Sửa">
+                            <HBox.margin>
+                                <Insets left="30.0" right="30.0" />
+                            </HBox.margin>
+                        </Button>
+                  <Button mnemonicParsing="false" onAction="#btnStatus" prefHeight="25.0" prefWidth="95.0" text="Bán\Dừng Bán">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#btnCancel" prefHeight="25.0" prefWidth="72.0" text="Thoát" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+                        <Button mnemonicParsing="false" onAction="#btnCancel" prefHeight="25.0" prefWidth="72.0" text="Thoát" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </Pane>
