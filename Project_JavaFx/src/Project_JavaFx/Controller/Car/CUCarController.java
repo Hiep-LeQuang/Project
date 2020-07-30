@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -290,4 +291,55 @@ public class CUCarController {
             e.getStackTrace();
         }
     }
-}
+    
+
+private boolean validation() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        if(txtCarName.getText().equals("") || txtPrice.getText().equals("") || txtSku.getText().equals("") || txtYear.getText().equals("")){
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Không được để trống");
+            alert.show();
+            return false;
+        }
+        if(txtCarName.getText().length() > 50 || txtCarName.getText().length() < 1){
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Phân loại nhập không vượt quá 30 kí tự");
+            alert.show();
+            return false;
+        }
+        
+        if(txtPrice.getText().length() > 50 || txtPrice.getText().length() < 1){
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Phân loại nhập không vượt quá 30 kí tự");
+            alert.show();
+            return false;
+        }
+        
+        if(txtSku.getText().length() > 50 || txtSku.getText().length() < 1){
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Phân loại nhập không vượt quá 30 kí tự");
+            alert.show();
+            return false;
+        }
+        
+        if(txtYear.getText().length() > 50 || txtYear.getText().length() < 1){
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Phân loại nhập không vượt quá 30 kí tự");
+            alert.show();
+            return false;
+        }
+
+        String name = txtCarName.getText();
+        String price = txtPrice.getText();
+        String sku = txtSku.getText();
+        String year = txtYear.getText();
+        String regex = "[a-zA-Z0-9_@]{6,}";
+        if(!Pattern.matches(regex, name) || !Pattern.matches(regex, price) || !Pattern.matches(regex, sku) || !Pattern.matches(regex, year)){
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Phân loại chỉ gồm các ký tự a-z, A-Z, 0-9, _, @");
+            alert.show();
+            return false;
+        }
+        
+        return true;
+    }}

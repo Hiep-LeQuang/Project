@@ -13,10 +13,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -38,10 +41,10 @@ public class CUContractController {
     private TextField txtPrice;
 
     @FXML
-    private TextField txtDos;
+    private DatePicker txtRD;
 
     @FXML
-    private TextField txtRD;
+    private DatePicker txtDos;
 
     @FXML
     private TextArea txtNote;
@@ -65,7 +68,7 @@ public class CUContractController {
     private ComboBox<String> cbxSku;
 
     @FXML
-    private ComboBox<String> cbxNameCar;
+    private TextField txtNameCar;
 
     @FXML
     void btnCancel(ActionEvent event) throws IOException {
@@ -74,7 +77,8 @@ public class CUContractController {
 
     @FXML
     void btnSave(ActionEvent event) throws IOException, SQLException {
-        if (editContract == null) {
+        if(validation()){
+            if (editContract == null) {
             Customer insertCustomer = extractCustomerFromFields();
             Contract insertContract = extractContractFromFields();
             insertCustomer = Customer.insert(insertCustomer);
@@ -99,6 +103,7 @@ public class CUContractController {
             }
             Navigator.getInstance().goToMain();
         }
+        }
     }
 
     private Customer extractCustomerFromFields() {
@@ -113,14 +118,15 @@ public class CUContractController {
     private Contract extractContractFromFields() {
         Contract contract = new Contract();
         contract.setPrice(Integer.parseInt(txtPrice.getText()));
-        contract.setDateOfSale(txtDos.getText());
+        LocalDate date = txtRD.getValue();
+        contract.setDateOfSale(txtDos.getValue().toString());
         contract.setDeposits(Integer.parseInt(txtDeposits.getText()));
-        contract.setProductReceiptDate(txtRD.getText());
+        contract.setProductReceiptDate(txtRD.getValue().toString());
+        
         contract.setAccountant(txtAccountant.getText());
         contract.setNote(txtNote.getText());
 
         contract.setSku(cbxSku.getSelectionModel().getSelectedItem());
-        contract.setCarName(cbxNameCar.getSelectionModel().getSelectedItem());
         contract.setStatus(cbxStatus.getSelectionModel().getSelectedItem());
 
         String sku = cbxSku.getSelectionModel().getSelectedItem();
@@ -131,19 +137,11 @@ public class CUContractController {
 
         }
 
-        String customer = cbxNameCar.getSelectionModel().getSelectedItem();
-        if (contract.getCustomerID(customer) != 0) {
-            contract.setCustomerID(Contract.getCustomerID(customer));
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Khong co khach hang!");
-
-        }
-
         return contract;
     }
 
     @FXML
-    void cbxNameCar(ActionEvent event) {
+    void txtNameCar(ActionEvent event) {
 
     }
 
@@ -210,27 +208,38 @@ public class CUContractController {
             cbxStatus.getItems().add("Chờ Lấy Hàng");
             cbxStatus.getItems().add("Đã Giao");
 
+            txtNameCar.setDisable(true);
+
+            cbxSku.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                String sku = newValue;
+                String carName = Contract.getCar(sku);
+                txtNameCar.setText(carName);
+
+            });
+
         } else {
             msg = "Chỉnh sửa hợp đồng";
             cbxStatus.getItems().add("Chờ Lấy Hàng");
             cbxStatus.getItems().add("Đã Giao");
 
             txtPrice.setText(editContract.getPrice().toString());
-            txtDos.setText(editContract.getDateOfSale());
+            txtDos.setValue(LocalDate.parse(editContract.getDateOfSale()));
             txtDeposits.setText(editContract.getDeposits().toString());
-            txtRD.setText(editContract.getProductReceiptDate());
+            txtRD.setValue(LocalDate.parse(editContract.getProductReceiptDate()));
             txtAccountant.setText(editContract.getAccountant());
             txtNote.setText(editContract.getNote());
             cbxSku.getSelectionModel().select(editContract.getSku());
-            
-//            cbxSku.buttonCellProperty().addListener((observable, oldValue, newValue) -> {
-//                
-//                
-//            });
-            
-            cbxNameCar.getSelectionModel().select(editContract.getCarName());
+            txtNameCar.setText(editContract.getCarName());
+            txtNameCar.setDisable(true);
 
-            txtCustomer.setText(editContract.getCarName());
+            cbxSku.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                String sku = newValue;
+                String carName = Contract.getCar(sku);
+                txtNameCar.setText(carName);
+
+            });
+
+            txtCustomer.setText(editContract.getCustomerName());
             txtPhone.setText(editContract.getPhone());
             txtAddress.setText(editContract.getAddress());
             txtEmail.setText(editContract.getEmail());
@@ -248,10 +257,101 @@ public class CUContractController {
             ResultSet rs = st.executeQuery("select * from Car");
             while (rs.next()) {
                 cbxSku.getItems().add(rs.getString("sku"));
-                cbxNameCar.getItems().add(rs.getString("carName"));
             }
         } catch (SQLException e) {
             e.getStackTrace();
         }
+    }
+    
+    private boolean validation() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        if (cbxSku.getSelectionModel().isEmpty() || txtCustomer.getText().equals("") || txtPhone.getText().equals("") || txtAddress.getText().equals("") || txtEmail.getText().equals("") || txtAccountant.getText().equals("") || txtDos.getChronology().equals("") || txtRD.getChronology().equals("") || cbxStatus.getSelectionModel().isEmpty() || txtPrice.getText().isEmpty() || txtDeposits.getText().isEmpty()) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Không được để trống");
+            alert.show();
+            return false;
+        }
+        if (txtCustomer.getText().length() > 50 || txtCustomer.getText().length() < 1) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Tên nhập không vượt quá 50 kí tự");
+            alert.show();
+            return false;
+        }
+
+        if (txtPhone.getText().length() == 10 ) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Số điện thoại bạn nhập không hợp lệ");
+            alert.show();
+            return false;
+        }
+
+        if (txtAddress.getText().length() > 100 || txtAddress.getText().length() < 1) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Địa chỉ nhập không vượt quá 100 kí tự");
+            alert.show();
+            return false;
+        }
+
+        if (txtEmail.getText().length() > 50 || txtEmail.getText().length() < 1) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Email nhập không vượt quá 50 kí tự");
+            alert.show();
+            return false;
+        }
+        
+        if (txtAccountant.getText().length() > 50 || txtAccountant.getText().length() < 1) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Tên nhập không vượt quá 50 kí tự");
+            alert.show();
+            return false;
+        }
+
+        if (txtDeposits.getText().length() > 11 ) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Số tiền nhập không hợp lệ");
+            alert.show();
+            return false;
+        }
+
+        if (txtPrice.getText().length() > 11 ) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Số tiền nhập không hợp lệ");
+            alert.show();
+            return false;
+        }
+
+        if (txtNote.getText().length() > 255) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Ghi chú nhập không vượt quá 255 kí tự");
+            alert.show();
+            return false;
+        }
+
+        String customerName = txtCustomer.getText();
+        String phone = txtPhone.getText();
+        String address = txtAddress.getText();
+        String email = txtEmail.getText();
+        String accountant = txtAccountant.getText();
+        String price = txtPrice.getText();
+        String deposits = txtDeposits.getText();
+        String note = txtNote.getText();
+        
+        String regex = "[a-zA-Z0-9_@]{1,255}";
+        if (!Pattern.matches(regex, address) || !Pattern.matches(regex, email) || !Pattern.matches(regex, note)) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Phân loại chỉ gồm các ký tự a-z, A-Z, 0-9, _, @");
+            alert.show();
+            return false;
+        }
+        
+        String regex1 = "[a-zA-Z0-9]{6,}";
+        if (!Pattern.matches(regex, address) || !Pattern.matches(regex, email) || !Pattern.matches(regex, note)) {
+            alert.setTitle("Cảnh báo đăng nhập");
+            alert.setHeaderText("Phân loại chỉ gồm các ký tự a-z, A-Z, 0-9, _, @");
+            alert.show();
+            return false;
+        }
+
+        return true;
     }
 }

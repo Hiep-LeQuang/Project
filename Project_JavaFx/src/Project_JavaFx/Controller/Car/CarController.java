@@ -20,9 +20,10 @@ import javafx.scene.layout.Pane;
  * @author lehie
  */
 public class CarController {
+
     @FXML
     private TableView<Car> tvCars;
-    
+
     @FXML
     private TableColumn<Car, String> tcSeri;
 
@@ -49,22 +50,20 @@ public class CarController {
 
     @FXML
     private TableColumn<Car, String> tcStatus;
-    
+
     @FXML
     private Pane secPane;
-    
-     @FXML
-    void btnBrand(ActionEvent event) {
-        
-    }
 
+    @FXML
+    void btnBrand(ActionEvent event) {
+
+    }
 
     @FXML
     void btnCarName(ActionEvent event) {
 
     }
 
-    
     @FXML
     void btnYear(ActionEvent event) {
 
@@ -75,23 +74,27 @@ public class CarController {
 
     }
 
-
     @FXML
     void txtSearch(ActionEvent event) {
 
     }
-    
+
     @FXML
-    void btnDetails(ActionEvent event) {
-        
+    void btnDetails(ActionEvent event) throws IOException, SQLException {
+        Car ShowCar = tvCars.getSelectionModel().getSelectedItem();
+        if (ShowCar == null) {
+            selectedCarWarning();
+        } else {
+            Navigator.getInstance().goToDetailsCar(ShowCar);
+        }
+
     }
-    
-    
+
     @FXML
     void btnCreate(ActionEvent event) throws IOException, SQLException {
         Navigator.getInstance().goToCreateCar(null);
     }
-    
+
     @FXML
     void btnUpdate(ActionEvent event) throws IOException, SQLException {
         Car updateCar = tvCars.getSelectionModel().getSelectedItem();
@@ -118,19 +121,19 @@ public class CarController {
             Car.update(updateStatus);
         }
     }
-    
+
     private void selectedCarWarning() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Vui lòng chọn một xe");
         alert.setHeaderText("Bạn phải chọn một xe ở trong danh sách");
         alert.showAndWait();
     }
-    
+
     @FXML
     void btnCancel(ActionEvent event) {
         System.exit(0);
     }
-    
+
     @FXML
     void btnHonda(ActionEvent event) {
 
@@ -145,44 +148,44 @@ public class CarController {
     void btnVinfat(ActionEvent event) {
 
     }
-    
-    public void initialize(){
-        
+
+    public void initialize() {
+
         tvCars.setItems(Car.selectAll());
-        
-        tcSeri.setCellValueFactory((Car)->{
+
+        tcSeri.setCellValueFactory((Car) -> {
             return Car.getValue().getCarSkuProperty();
         });
-        
-        tcProduct.setCellValueFactory((Car)->{
+
+        tcProduct.setCellValueFactory((Car) -> {
             return Car.getValue().getCarNameProperty();
         });
-        tcBrand.setCellValueFactory((Car)->{
+        tcBrand.setCellValueFactory((Car) -> {
             return Car.getValue().getBrandProperty();
         });
-        tcCategory.setCellValueFactory((Car)->{
+        tcCategory.setCellValueFactory((Car) -> {
             return Car.getValue().getCategoryProperty();
         });
-        tcYear.setCellValueFactory((Car)->{
+        tcYear.setCellValueFactory((Car) -> {
             return Car.getValue().getYearOfManufactureProperty();
         });
-        tcPrice.setCellValueFactory((Car)->{
+        tcPrice.setCellValueFactory((Car) -> {
             return Car.getValue().getPriceProperty();
         });
-        tcGear.setCellValueFactory((Car)->{
+        tcGear.setCellValueFactory((Car) -> {
             return Car.getValue().getGearProperty();
         });
-        tcColor.setCellValueFactory((Car)->{
+        tcColor.setCellValueFactory((Car) -> {
             return Car.getValue().getColorProperty();
         });
         tcStatus.setCellValueFactory((Car) -> {
             return Car.getValue().getStatusProperty();
         });
     }
-    
+
     @FXML
     void btnXecon(ActionEvent event) throws IOException {
-       
+
         tvCars.setItems(Car.selectCategory1());
         tvCars.refresh();
         tcSeri.setCellValueFactory((Car) -> {
@@ -209,7 +212,7 @@ public class CarController {
         tcColor.setCellValueFactory((Car) -> {
             return Car.getValue().getColorProperty();
         });
-        
+
         tcStatus.setCellValueFactory((Car) -> {
             return Car.getValue().getStatusProperty();
         });
@@ -243,7 +246,7 @@ public class CarController {
         tcColor.setCellValueFactory((Car) -> {
             return Car.getValue().getColorProperty();
         });
-        
+
         tcStatus.setCellValueFactory((Car) -> {
             return Car.getValue().getStatusProperty();
         });

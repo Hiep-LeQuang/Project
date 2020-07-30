@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class DbService {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
-    private static final String CONN_STRING = "jdbc:mysql://localhost/Test?serverTimezone=UTC";
+    private static final String CONN_STRING = "jdbc:mysql://localhost/Project?serverTimezone=UTC";
     
     public static Connection getConnection() throws SQLException{
         return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);

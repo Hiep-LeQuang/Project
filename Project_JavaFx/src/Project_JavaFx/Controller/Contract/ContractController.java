@@ -53,8 +53,13 @@ public class ContractController {
     private TableColumn<Contract, String> tcStatus;
 
     @FXML
-    void btnDetails(ActionEvent event) {
-
+    void btnDetails(ActionEvent event) throws IOException, SQLException {
+        Contract ShowContract = tvContract.getSelectionModel().getSelectedItem();
+        if (ShowContract == null) {
+            selectedContractWarning();
+        } else {
+            Navigator.getInstance().goToDetailsContract(ShowContract);
+        }
     }
 
     @FXML

@@ -5,6 +5,7 @@
  */
 package Project_JavaFx.Controller.Contract;
 
+import Project_JavaFx.Controller.Car.Car;
 import Project_JavaFx.Controller.DbService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -379,8 +380,8 @@ public class Contract {
                 ){
             stmt1.setInt(1, deleteContract.getContractID());
             
-            int rowDelete1 = stmt1.executeUpdate();
-            if(rowDelete1 == 1 && rowDelete1 == 1){
+            int rowDelete = stmt1.executeUpdate();
+            if(rowDelete == 1){
                 System.out.println("Xoa ok");
                 return true;
             } else {
@@ -422,6 +423,23 @@ public class Contract {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return 0;
+        }
+    }
+    
+    public static String getCar(String sku){
+        try {
+            Connection connection = DbService.getConnection();
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("select car.carName from car where sku = '" +sku + "'" );
+            if(rs.next()){
+                
+                return rs.getString(1);
+            } else{
+                return null;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
         }
     }
 }

@@ -33,19 +33,6 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </MenuButton>
-                  <MenuButton alignment="CENTER" mnemonicParsing="false" popupSide="RIGHT" prefHeight="32.0" prefWidth="126.0" text="Thương Hiệu">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#btnToyota" text="Toyota" />
-                        <MenuItem mnemonicParsing="false" onAction="#btnHonda" text="Honda" />
-                        <MenuItem mnemonicParsing="false" onAction="#btnVinfat" text="Vinfat" />
-                     </items>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </MenuButton>
                         <MenuButton mnemonicParsing="false" prefHeight="0.0" prefWidth="159.0" text="Tìm Kiếm">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#btnCarName" text="Theo Tên" />

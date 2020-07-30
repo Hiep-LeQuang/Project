@@ -20,7 +20,7 @@ public class Main_Project extends Application {
     public void start(Stage primaryStage) throws IOException {
         Navigator.getInstance().setStage(primaryStage);
         Navigator.getInstance().getStage().setTitle("Quản Lý Bán Ô Tô");
-        Navigator.getInstance().goToMain();
+        Navigator.getInstance().goToLogin();
         Navigator.getInstance().getStage().show();
     }
 
